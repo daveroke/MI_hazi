@@ -58,8 +58,7 @@ public class Main {
                 System.out.print(packed[i][y]);
             }
             System.out.println();
-
-            /*valami van is */
+            
         }
     }
 }
