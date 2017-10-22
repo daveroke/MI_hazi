@@ -49,8 +49,15 @@ public class Main {
 
         for(int i = 0; i < stuffSizes.length; i++){
             if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && stuffSizes[i] <= packedSize){
+
                 System.out.println("Belefér");
+                for(int a = 0; a < stuffs[i].getHeigth(); a++){
+                    for(int b = 0; b < stuffs[i].getWidth(); b++){
+                            pack[b][a] = stuffs[i].getStuffNumber();
+                    }
+                }
                 packedSize = packedSize - stuffSizes[i];
+
             }else{
                 stuffs[i].changeDir();
                 if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && stuffSizes[i] <= packedSize){
@@ -67,10 +74,6 @@ public class Main {
                 System.out.print(pack[y][i]);
             }
             System.out.println();
-<<<<<<< HEAD
-=======
-            
->>>>>>> 28f160eca83d82ffbced0f62a9cceaec68994449
         }
 
     }
