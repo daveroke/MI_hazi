@@ -1,5 +1,4 @@
 import java.lang.System;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,58 +8,69 @@ public class Main {
 
 
     public static void main(String[] args)  {
-        List<int[][]> stuffs = new ArrayList<int[][]>(); //elemek listája
-        List<Integer> stuffSizes = new ArrayList<Integer>(); //elemek méreténke listája
+        //List<Stuff> stuffs = new ArrayList<Stuff>(); //elemek listája
         Scanner scan = new Scanner(System.in);
 
         int packwidth = scan.nextInt(); //poggyász szélessége
         int packheigth = scan.nextInt(); //poggyász magassága
         int numOfStuff = scan.nextInt(); //elemek száma
+        int[] stuffSizes = new int[numOfStuff]; //elemek méretének// listája
+        Stuff[] stuffs = new Stuff[numOfStuff];
+
         //elemek méreteinek beolvasása
         for (int i = 0; i < numOfStuff; i++){
             int stuffW = scan.nextInt();
             int stuffH = scan.nextInt();
-            int[][] stuff = new int[stuffW][stuffH]; //elem init
-            //elemek feltöltése azzal a számkóddal ahányadik elem
-            for(int k = 0; k < stuffH; k++){
-                for(int z = 0; z < stuffW; z++){
-                    stuff[z][k] = i+1;
-                }
-            }
-            stuffs.add(stuff);
-            stuffSizes.add(stuffW*stuffH); // elemek méretének lista feltöltése
+            stuffs[i] = new Stuff(stuffW, stuffH, i); //elem init
+            stuffSizes[i] = stuffH*stuffW;
         }
-
-        int[][] packed = new int[packwidth][packheigth]; //poggász init
-
+        //Poggász init
+        int[][] pack = new int[packwidth][packheigth];
         for(int k = 0; k < packheigth; k++){
             for(int z = 0; z < packwidth; z++){
-                packed[z][k] = 9;
+                pack[z][k] = 0;
             }
         }
         int packedSize = packheigth*packwidth; //poggyász terület számítás
-
-        for(int i = 0; i < stuffSizes.size(); i ++){
-            if(stuffSizes.get(i) <= packedSize){
-                System.out.println("Belefér");
-                for(int gk = 0; gk < stuffs.get(i)[0].length; gk++){
-                    for(int zh = 0; zh < stuffs.get(i).length; zh++){
-                        packed[gk][zh] = stuffs.get(i)[gk][zh];
-                    }
+        
+        // Buborék rendezés az elemekre
+        for(int i = 0; i < (stuffSizes.length - 1); i++){
+            for(int f = 0; f < stuffSizes.length - i - 1; f ++){
+                if(stuffSizes[f] > stuffSizes[f+1]){
+                    int temp = stuffSizes[f];
+                    Stuff stemp = stuffs[f];
+                    stuffSizes[f] = stuffSizes[f+1];
+                    stuffs[f] = stuffs[f+1];
+                    stuffSizes[f+1] = temp;
+                    stuffs[f+1] = stemp;
                 }
-                packedSize = packedSize - stuffSizes.get(i);
-            }else{
-                System.out.println("Nem fér bele");
             }
         }
+
+        for(int i = 0; i < stuffSizes.length; i++){
+            if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && stuffSizes[i] <= packedSize){
+                System.out.println("Belefér");
+                packedSize = packedSize - stuffSizes[i];
+            }else{
+                stuffs[i].changeDir();
+                if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && stuffSizes[i] <= packedSize){
+                    System.out.println("Belefér");
+                    packedSize = packedSize - stuffSizes[i];
+                }else {
+                    System.out.println("Nem fér bele");
+                }
+            }
+        }
+
         for(int i = 0; i < packheigth; i++){
             for(int y = 0; y < packwidth; y++){
-                System.out.print(packed[i][y]);
+                System.out.print(pack[y][i]);
             }
             System.out.println();
-
-            /*valami van is */
         }
+
     }
+
+
 }
 
