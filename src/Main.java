@@ -35,8 +35,8 @@ public class Main {
         
         // Buborék rendezés az elemekre
         for(int i = 0; i < (stuffSizes.length - 1); i++){
-            for(int f = 0; f < stuffSizes.length - i - 1; f ++){
-                if(stuffSizes[f] > stuffSizes[f+1]){
+            for(int f = 0; f < stuffSizes.length - i - 1; f++){
+                if(stuffSizes[f] < stuffSizes[f+1]){
                     int temp = stuffSizes[f];
                     Stuff stemp = stuffs[f];
                     stuffSizes[f] = stuffSizes[f+1];
@@ -49,15 +49,13 @@ public class Main {
 
         for(int i = 0; i < stuffSizes.length; i++){
             if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && stuffSizes[i] <= packedSize){
-
                 System.out.println("Belefér");
-                for(int a = 0; a < stuffs[i].getHeigth(); a++){
-                    for(int b = 0; b < stuffs[i].getWidth(); b++){
-                            pack[b][a] = stuffs[i].getStuffNumber();
+                packedSize = packedSize - stuffSizes[i];
+                for (int a = 0; a < stuffs[i].getHeigth(); a++) {
+                    for (int b = 0; b < stuffs[i].getWidth(); b++) {
+                        pack[b][a] = stuffs[i].getStuffNumber();
                     }
                 }
-                packedSize = packedSize - stuffSizes[i];
-
             }else{
                 stuffs[i].changeDir();
                 if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && stuffSizes[i] <= packedSize){
@@ -71,13 +69,13 @@ public class Main {
 
         for(int i = 0; i < packheigth; i++){
             for(int y = 0; y < packwidth; y++){
-                System.out.print(pack[y][i]);
+                if(y < packwidth-1) {
+                    System.out.print(pack[y][i] + "\t");
+                }else{
+                    System.out.print(pack[y][i]);
+                }
             }
             System.out.println();
         }
-
     }
-
-
 }
-
