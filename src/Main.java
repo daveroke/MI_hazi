@@ -67,6 +67,10 @@ public class Main {
                 System.out.print(pack[y][i]);
             }
             System.out.println();
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 28f160eca83d82ffbced0f62a9cceaec68994449
         }
 
     }
