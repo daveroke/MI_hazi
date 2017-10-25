@@ -49,57 +49,7 @@ public class Main {
                 }
             }
         }
-        int badheigth;
-        int badwidth;
-        boolean good = true;
-        for(int i = 0; i < stuffs.length; i++){
-            if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && good){
-                System.out.println("Belefér");
-                for (int a = 0; a < packheigth; a++) {
-                    for (int b = 0; b < packwidth; b++) {
-                        if(pack[b][a] == 0){
-                            for (int c = 0; c < stuffs[i].getHeigth(); c++) {
-                                for (int d = 0; d < stuffs[i].getWidth(); d++) {
-                                    pack[d][c] = stuffs[i].getStuffNumber();
-                                }
-                            }
-                        }else{
-                            badheigth = a;
-                            badwidth = b;
-                            good = false;
-                            break;
-                        }
-                    }
-                }
-            }else{
-                stuffs[i].changeDir();
-                if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth() && good){
-                    System.out.println("Belefér");
-                    for (int a = 0; a < packheigth; a++) {
-                        for (int b = 0; b < packwidth; b++) {
-                            if(pack[b][a] == 0){
-                                for (int c = 0; c < stuffs[i].getHeigth(); c++) {
-                                    for (int d = 0; d < stuffs[i].getWidth(); d++) {
-                                        pack[d][c] = stuffs[i].getStuffNumber();
-                                    }
-                                }
-                            }else{
-                                badheigth = a;
-                                badwidth = b;
-                                good = false;
-                                break;
-                            }
-                        }
-                    }
-                }else{
-                    if(good == false){
-                        System.out.println("egymásra");
-                    }else{
-                        System.out.println("Nem fér bele");
-                    }
-                }
-            }
-        }
+
 
         for(int i = 0; i < packheigth; i++){
             for(int y = 0; y < packwidth; y++){
@@ -110,10 +60,10 @@ public class Main {
                 }
             }
             System.out.println();
-<<<<<<< HEAD
-
-=======
->>>>>>> 7fba251deb9f7e23d0be0b4b8c5ec4e3c85f2360
         }
+    }
+
+    public void writeInPack(int[][] p, Stuff s){
+        
     }
 }
