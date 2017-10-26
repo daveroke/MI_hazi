@@ -64,6 +64,6 @@ public class Main {
     }
 
     public void writeInPack(int[][] p, Stuff s){
-        
+
     }
 }
