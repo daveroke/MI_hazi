@@ -42,19 +42,63 @@ public class Main {
             }
         }
 
+        for (int i = 0; i < (stuffs.length - 1); i++) {
+            for (int f = 0; f < stuffs.length - i - 1; f++) {
+                if (stuffs[f].getWidth() < stuffs[f + 1].getWidth()) {
+                    Stuff stemp = stuffs[f];
+                    stuffs[f] = stuffs[f + 1];
+                    stuffs[f + 1] = stemp;
+                }
+            }
+        }
+
         for(int i = 0; i < stuffs.length; i++){
-            if((pack[0][0] == 0)){
-                if(packheigth >= stuffs[i].getHeigth() && packwidth >= stuffs[i].getWidth()) {
-                    for (int a = 0; a < stuffs[i].getHeigth(); a++) {
-                        for (int b = 0; b < stuffs[i].getWidth(); b++) {
-                            pack[a][b] = stuffs[i].getStuffNumber();
+            System.out.println(stuffs[i].getStuffNumber() + "\t" + stuffs[i].getHeigth() +"\t" + stuffs[i].getWidth());
+        }
+
+        for(int i = 0; i < stuffs.length; i++){
+            boolean packed = false;
+            for(int posY = 0; posY < packheigth; posY++){
+                for(int posX = 0; posX < packwidth; posX++){
+                    if(!packed && (pack[posY][posX] == 0) && (packheigth - posY > stuffs[i].getHeigth()-1) && (packwidth - posX > stuffs[i].getWidth()-1)){
+                        boolean good = true;
+                        for(int sPosY = posY; sPosY < posY + stuffs[i].getHeigth(); sPosY++){
+                            for(int sPosX = posX; sPosX < posX + stuffs[i].getWidth(); sPosX++){
+                                if(pack[sPosY][sPosX] != 0){
+                                    good = false;
+                                }
+                            }
+                        }
+                        if(good){
+                            for(int packingY = posY; packingY < posY + stuffs[i].getHeigth(); packingY++){
+                                for(int packingX = posX; packingX < posX + stuffs[i].getWidth(); packingX++){
+                                    pack[packingY][packingX] = stuffs[i].getStuffNumber();
+                                }
+                            }
+                            packed = true;
+                        }
+                    }else {
+                        stuffs[i].changeDir();
+                        if(!packed && (pack[posY][posX] == 0) && (packheigth - posY > stuffs[i].getHeigth()-1) && (packwidth - posX > stuffs[i].getWidth()-1)) {
+                            boolean good = true;
+                            for (int sPosY = posY; sPosY < posY + stuffs[i].getHeigth(); sPosY++) {
+                                for (int sPosX = posX; sPosX < posX + stuffs[i].getWidth(); sPosX++) {
+                                    if (pack[sPosY][sPosX] != 0) {
+                                        good = false;
+                                    }
+                                }
+                            }
+                            if (good) {
+                                for (int packingY = posY; packingY < posY + stuffs[i].getHeigth(); packingY++) {
+                                    for (int packingX = posX; packingX < posX + stuffs[i].getWidth(); packingX++) {
+                                        pack[packingY][packingX] = stuffs[i].getStuffNumber();
+                                    }
+                                }
+                                packed = true;
+                            }
                         }
                     }
-                }else{
-                    System.out.println("nem jó méret");
                 }
-            }else{
-
             }
         }
 
