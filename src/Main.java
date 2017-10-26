@@ -69,11 +69,4 @@ public class Main {
         }
     }
 
-<<<<<<< HEAD
-    public void writeInPack(int[][] p, Stuff s){
-
-    }
 }
-=======
-}
->>>>>>> 76ccf26105a88ffab561686d7be3d353a59d6c56
